@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import demo
+from .models import Record
 # Register your models here.
-admin.site.register(demo)
-admin.site.unregister(demo)
+admin.site.register(Record)
