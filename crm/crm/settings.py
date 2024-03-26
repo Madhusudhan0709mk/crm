@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,15 +76,23 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',  #changed database name to mysql form sqlite3
+#         'NAME': 'crm',
+#         'USER':'postgres',
+#         'PASSWORD':'mad123',
+#         'HOST':'localhost',
+#         'PORT': '5432'  
+#     }
+# }
+# Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  #changed database name to mysql form sqlite3
-        'NAME' : 'elderco',
-        'USER' : 'root',
-        'PASSWORD' : 'mad123',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:mad123@localhost:5432/crm',
+        conn_max_age=600
+    )
 }
 
 
@@ -123,9 +133,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     # ... other directories
 ]
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join (BASE_DIR, 'assets')
-
+# STATIC_URL = 'static/'
+# STATIC_ROOT = os.path.join (BASE_DIR, 'assets')
+STATIC_URL = '/static/'
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 # Default primary key field type
