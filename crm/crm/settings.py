@@ -89,11 +89,11 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 # Ensure that DATABASE_URL environment variable is set
 # if 'DATABASE_URL' in os.environ:
-DATABASE_URL = 'postgres://crm_siej_user:q3mTo4UZecxSlbPjFf9geu7hgQtwaLs2@dpg-co1rqjuct0pc73ddc6dg-a.oregon-postgres.render.com/crm_siej'
+# DATABASE_URL = 'postgres://crm_siej_user:q3mTo4UZecxSlbPjFf9geu7hgQtwaLs2@dpg-co1rqjuct0pc73ddc6dg-a.oregon-postgres.render.com/crm_siej'
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    }
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+#     }
 # else:
 #     # If DATABASE_URL is not set, provide a default configuration for your local database
 #     DATABASES = {
@@ -110,6 +110,15 @@ DATABASES = {
 # from dj_database_url import parse_database_url
 
 # DATABASE_URL = parse_database_url('postgresql://postgres:mad123@localhost:5432/crm')
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:mad123@localhost:5432/crm',
+        conn_max_age=600
+    )
+}
+
 
 
 # Password validation
