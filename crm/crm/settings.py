@@ -10,11 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
-import dj_database_url
+
 from pathlib import Path
 # settings.py
-from dotenv import load_dotenv
-load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -85,7 +83,7 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  #changed database name to mysql form sqlite3
+        'ENGINE': 'django.db.backends.postgresql',  #changed database name to mysql form sqlite3
         'NAME': 'crm',
         'USER':'postgres',
         'PASSWORD':'mad123',
@@ -118,13 +116,13 @@ DATABASES = {
 
 # DATABASE_URL = parse_database_url('postgresql://postgres:mad123@localhost:5432/crm')
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:mad123@localhost:5432/crm',
-        conn_max_age=600
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://postgres:mad123@localhost:5432/crm',
+#         conn_max_age=600
+#     )
+# }
 
 
 
