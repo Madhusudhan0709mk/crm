@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  #changed database name to mysql form sqlite3
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',  #changed database name to mysql form sqlite3
         'NAME': 'crm',
         'USER':'postgres',
         'PASSWORD':'mad123',
