@@ -107,10 +107,10 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crm',
-        'USER': 'postgres',
-        'PASSWORD': 'mad123',
-        'HOST': 'db',
+        'NAME': 'postgres',
+        'USER': 'postgres.ezmwyuqwadtjteprsudu',
+        'PASSWORD': '%6$VYUM/wt6.Xhg',
+        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',
         'PORT': '5432',
     }
 }
