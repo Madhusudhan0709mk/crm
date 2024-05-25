@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
-import dj_database_url
+
 
 from pathlib import Path
 
@@ -78,11 +78,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'crm.wsgi.application'
 
 
-DATABASES = {
-    "default": dj_database_url.parse("postgres://crm_deploy_user:bWAp9jjuDZVhW6cnVbCwewWgiZvPatUK@dpg-co4eb74f7o1s738rfebg-a.oregon-postgres.render.com/crm_deploy")
-}
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# DATABASES = {
+#     "default": dj_database_url.parse("postgres://crm_deploy_user:bWAp9jjuDZVhW6cnVbCwewWgiZvPatUK@dpg-co4eb74f7o1s738rfebg-a.oregon-postgres.render.com/crm_deploy")
+# }
 
 # DATABASES = {
 #     'default': {
@@ -94,27 +92,26 @@ DATABASES = {
 #         'PORT': '5432'  
 #     }
 # }
-# Replace the SQLite DATABASES configuration with PostgreSQL:
-# Ensure that DATABASE_URL environment variable is set
-# if 'DATABASE_URL' in os.environ:
-# DATABASE_URL = 'postgres://crm_siej_user:q3mTo4UZecxSlbPjFf9geu7hgQtwaLs2@dpg-co1rqjuct0pc73ddc6dg-a.oregon-postgres.render.com/crm_siej'
 
 # DATABASES = {
-#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres.ezmwyuqwadtjteprsudu',
+#         'PASSWORD': '%6$VYUM/wt6.Xhg',
+#         'HOST': 'aws-0-ap-south-1.pooler.supabase.com',
+#         'PORT': '5432',
 #     }
-# else:
-#     # If DATABASE_URL is not set, provide a default configuration for your local database
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.ezmwyuqwadtjteprsudu',
-        'PASSWORD': '%6$VYUM/wt6.Xhg',
-        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'sqlite3',
+ 
     }
 }
-
 # from dj_database_url import parse_database_url
 
 # DATABASE_URL = parse_database_url('postgresql://postgres:mad123@localhost:5432/crm')
@@ -166,7 +163,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     # ... other directories
 ]
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join (BASE_DIR, 'assets')
 # STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
